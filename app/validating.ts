@@ -17,7 +17,7 @@ import { bootstrap } from 'angular2/platform/browser';
     
     <lable>Name</lable>
     <input type = 'text' [ngFormControl] = 'input1' class = "form-control " #j />
-    {{j}}
+    
     </div>
     
     
@@ -25,8 +25,11 @@ import { bootstrap } from 'angular2/platform/browser';
     [class.has-success] = "input2.valid && input2.touched">
     
     <lable>Last Name:</lable>
-    <input type = 'text' [ngFormControl] = 'input2' class = "form-control"  #i />
-    {{i}}
+    <input type = 'text' [ngFormControl] = 'input2' class = "form-control"  #i/>
+    {{i.className}}
+    <div *ngIf = "!input2.valid && input2.touched">
+    <div>Invalid</div>
+    </div>
     </div>
     
     <button type = 'submit' [disabled] = "!f.valid">Submit</button>
