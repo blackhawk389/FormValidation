@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/common', 'angular2/platform/browser', './formval'], function(exports_1) {
+System.register(['angular2/core', 'angular2/common', 'angular2/platform/browser'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'angular2/common', 'angular2/platform/browser'
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, browser_1, formval_1;
+    var core_1, common_1, browser_1;
     var cusValidation;
     return {
         setters:[
@@ -20,30 +20,30 @@ System.register(['angular2/core', 'angular2/common', 'angular2/platform/browser'
             },
             function (browser_1_1) {
                 browser_1 = browser_1_1;
-            },
-            function (formval_1_1) {
-                formval_1 = formval_1_1;
             }],
         execute: function() {
+            //import { formValidator } from './formval';
             cusValidation = (function () {
                 function cusValidation(fb) {
                     this.myform = fb.group({
-                        'inputfield': ['', common_1.Validators.compose([common_1.Validators.required, formval_1.formValidator])]
+                        'inputfield': ['', common_1.Validators.compose([common_1.Validators.required, this.formValidator])]
                     });
                     this.inputfield = this.myform.controls['inputfield'];
                 }
-                //  formValidator(val : Control) :any {
-                //     if(val.value.match(/^123/)){
-                //         return {inval : true};
-                //     }
-                // }
+                cusValidation.prototype.formValidator = function (val) {
+                    console.log('inside form');
+                    if (!val.value.match(/^123'/)) {
+                        console.log('inside matched');
+                        return { inval: true };
+                    }
+                };
                 cusValidation.prototype.onSubmit = function () {
                     console.log('submit function called');
                 };
                 cusValidation = __decorate([
                     core_1.Component({
                         selector: 'cusValidate',
-                        template: "\n     \n     <form [ngFormModel] = \"myform\" (ngSubmit) = \"onSubmit()\">\n     \n     <lable>Credit Card Number</lable>\n     <div>\n     <input type = \"text\" [ngFormControl] = \"inputfield\"/>\n     <div [class.has-error] = '!inval'>\n      </div>\n     </div>\n     <button type = \"submit\">Submit</button>\n     </form>\n    \n    \n    ",
+                        template: "\n     \n     <form [ngFormModel] = \"myform\" (ngSubmit) = \"onSubmit()\">\n     \n     <lable>Credit Card Number</lable>\n     <div>\n     <input type = \"text\" [ngFormControl] = \"inputfield\"/>\n     <div [class.has-error] = 'inval'>\n      </div>\n     </div>\n     <button type = \"submit\">Submit</button>\n     </form>\n    \n    \n    ",
                         directives: [common_1.FORM_DIRECTIVES]
                     }), 
                     __metadata('design:paramtypes', [common_1.FormBuilder])

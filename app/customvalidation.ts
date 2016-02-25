@@ -1,7 +1,7 @@
 import { Component } from 'angular2/core';
 import { FORM_DIRECTIVES, AbstractControl, ControlGroup, FormBuilder,Control, Validators } from 'angular2/common';
 import { bootstrap } from 'angular2/platform/browser';
-import { formValidator } from './formval';
+//import { formValidator } from './formval';
 
 @Component({
     selector : 'cusValidate',
@@ -12,7 +12,7 @@ import { formValidator } from './formval';
      <lable>Credit Card Number</lable>
      <div>
      <input type = "text" [ngFormControl] = "inputfield"/>
-     <div [class.has-error] = '!inval'>
+     <div [class.has-error] = 'inval'>
       </div>
      </div>
      <button type = "submit">Submit</button>
@@ -31,16 +31,18 @@ export class cusValidation{
     
     constructor(fb : FormBuilder){
        this.myform = fb.group({
-            'inputfield' : ['' , Validators.compose([Validators.required, formValidator])]
+            'inputfield' : ['' , Validators.compose([Validators.required, this.formValidator])]
         })
        this.inputfield = this.myform.controls['inputfield']
     }
     
-    //  formValidator(val : Control) :any {
-    //     if(val.value.match(/^123/)){
-    //         return {inval : true};
-    //     }
-    // }
+     formValidator(val : Control) :any {
+         console.log('inside form')
+        if(!val.value.match(/^123'/)){
+            console.log('inside matched')
+            return {inval : true};
+        }
+    }
     
     onSubmit(){
         console.log('submit function called')
