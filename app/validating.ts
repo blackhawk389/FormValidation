@@ -9,15 +9,15 @@ import { bootstrap } from 'angular2/platform/browser';
     
     <h1>Form Validation<h1>
     
-    <form #f = "ngForm" [ngFormModel] = 'cg' (ngSubmit) = 'onSubmit(cg.value)' class = "form-inline">
+    <form  [ngFormModel] = 'cg' (ngSubmit) = 'onSubmit(cg.value)' class = "form-inline">
     
     <div class = "form-group " 
     [class.has-error] = "!input1.valid && input1.touched"
     [class.has-success] = "input1.valid && input1.touched">
     
     <lable>Name</lable>
-    <input type = 'text' [ngFormControl] = 'input1' class = "form-control " #j />
-    
+    <input type = 'text' [ngFormControl] = 'input1' class = "form-control " />
+    <div [class.has-error] = "input1.hasError('required')">Required</div 
     </div>
     
     
@@ -31,8 +31,9 @@ import { bootstrap } from 'angular2/platform/browser';
     <div>Invalid</div>
     </div>
     </div>
-    
+    <div [class.has-success] = "cg.valid">Valid form</div>
     <button type = 'submit' [disabled] = "!f.valid">Submit</button>
+    
     </form>
     
     `,
