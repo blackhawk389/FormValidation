@@ -32,9 +32,12 @@ System.register(['angular2/core', 'angular2/common', 'angular2/platform/browser'
                 }
                 cusValidation.prototype.formValidator = function (val) {
                     console.log('inside form');
-                    if (!val.value.match(/^123'/)) {
+                    if (val.value.match(/^[0-9]+$/)) {
                         console.log('inside matched');
                         return { inval: true };
+                    }
+                    else {
+                        console.log('not allowed');
                     }
                 };
                 cusValidation.prototype.onSubmit = function () {

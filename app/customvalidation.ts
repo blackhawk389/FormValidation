@@ -38,9 +38,12 @@ export class cusValidation{
     
      formValidator(val : Control) :any {
          console.log('inside form')
-        if(!val.value.match(/^123'/)){
+        if(val.value.match(/^[0-9]+$/)){
             console.log('inside matched')
             return {inval : true};
+        }
+        else{
+            console.log('not allowed')
         }
     }
     
